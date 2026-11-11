@@ -1,0 +1,44 @@
+Si es la primera vez que ejecutas el programa en una raspberri Pi con el software recien instalado:
+
+Conectarte a la red Wi-Fi llamada "VMX-1234", con la contraseña "password"
+Abrir la consola de comandos --> Win + R --> cmd
+Entrar con --> ssh vmx@10.12.34.2
+Introducir la contraseña --> password
+Confirmar que quieres guardar ese dispositivo --> yes
+
+Crear un archivo en la ruta indicada y meter el contenido del archivo params.yaml
+
+Crear el archivo --> nano $HOME/studica_ws/src/studica_control/config/params.yaml
+Pegar el contenido con click derecho
+Guardar --> Ctrl + S
+Salir --> Ctrl + X
+
+Ahora vamos a crear el archivo de python y pegar el contenido del archivo Reto_5_Studica_Lander_Endika.py:
+
+nano /home/vmx/studica_reto_5/Reto_5_Studica_Lander_Endika.py
+Pegar con click derecho
+Guardar --> Ctrl + S
+Salir --> Ctrl + X
+
+Ahora vamos a sincronizar el mando por bluetooth
+
+bluetoothctl
+power on
+agent on
+default-agent
+scan on
+
+(es posible que se desconecte al intentar buscar dispositivos, si esto para, volver a conectar ssh y rehacer esta ultima parte)
+Ahora hay que buscar nuestro dispositivo bluetooth y apuntar la MAC (por ejemplo AA:BB:CC:DD:EE:FF)
+
+Para emparejar el mando:
+Emparejar --> pair AA:BB:CC:DD:EE:FF
+Registrar --> trust AA:BB:CC:DD:EE:FF
+Conectar --> connect AA:BB:CC:DD:EE:FF
+
+Dejar de buscar dispositivos --> scan off
+
+Salir --> exit
+
+Ver dispositivos registrados --> bluetoothctl devices
+

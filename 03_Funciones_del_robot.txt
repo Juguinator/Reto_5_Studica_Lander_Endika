@@ -1,0 +1,47 @@
+Esta version tiene programado:
+2 modos: Mando fisico y mando digital
+
+Requiere que se presione el boton start en el robot para poder moverse.
+Presionar stop para bloquear el movimiento del robot.
+
+Joystick izquierdo:
+	- Arriba = avance del robot
+	- Abajo = retroceso del robot
+	- Izquierda = desplazar a la izquierda
+	- Derecha = desplazar a la derecha
+
+Joystick derecho:
+	- Arriba = Elevar pinza
+	- Abajo = Descender pinza
+	- Izquierda = Rotar pinza antihorariamente
+	- Derecha = Rotar pinza horariamente
+
+Botones:
+	- Cuadrado (izq) = Cerrar pinza
+	- Cruz (abajo) = Abrir pinza
+	- Circulo (drch) = Modo rapido (activa el modo x2 de velocidad, pulsar otra vez para desactivar)
+	- Triangulo (arriba) = Modo turbo (mientras se mantiene, los motores se mueven a maxima potencia)
+
+Gatillos pequeños:
+	- L1 = Rotar el robot antihorariamente
+	- R1 = Rotar el robot horariamente
+
+Gatillos analogicos:
+	- L2:
+		Suave = Girar a la izquierda.
+		Medio = Rotar sobre la rueda izquierda.
+		Fuerte = Rotar sobre si mismo horariamente
+	- R2:
+		Suave = Girar a la derecha.
+		Medio = Rotar sobre la rueda derecha.
+		Fuerte = Rotar sobre si mismo anithorariamente
+
+Boton options cambia entre modo de control y modo autonomo.
+El modo autonomo depende del LiDAR para buscar obstaculos y avanzar evitandolos
+
+Con la ip 10.12.34.2:1181 = Camara
+10.12.34.2:1182 = Mando digital
+10.12.34.2:1183 = Camara con reconocimiento de colores
+10.12.34.2:1184 = LiDAR
+
+

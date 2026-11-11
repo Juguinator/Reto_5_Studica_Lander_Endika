@@ -1,0 +1,128 @@
+control_server:
+  ros__parameters:
+    use_sim_time: false
+
+    titan:
+      enabled: true
+      sensors: ["titan0"]
+
+      titan0:
+        can_id: 42
+        motor_freq: 15600
+        encoder_rate_hz: 20
+        motor_update_rate_hz: 50
+        limit_switches: false
+        enable_freshness: true
+
+        m_0:
+          encoder_mode: "quadrature"
+          dist_per_tick: 1.0
+          invert_motor: false
+          invert_encoder: false
+          invert_rpm: false
+
+        m_1:
+          encoder_mode: "quadrature"
+          dist_per_tick: 1.0
+          invert_motor: false
+          invert_encoder: false
+          invert_rpm: false
+
+        m_2:
+          encoder_mode: "quadrature"
+          dist_per_tick: 1.0
+          invert_motor: false
+          invert_encoder: false
+          invert_rpm: false
+
+        m_3:
+          encoder_mode: "quadrature"
+          dist_per_tick: 1.0
+          invert_motor: false
+          invert_encoder: false
+          invert_rpm: false
+
+    servo:
+      enabled: true
+      sensors: ["servo_1", "servo_2", "servo_3"]
+
+      servo_1:    #Elevación de la pinza
+        port: 12
+        type: "continuous"
+
+      servo_2:    #Apertura y cierre de la pinza
+        port: 16
+        type: "continuous"
+
+      servo_3:    #Rotacion de la pinza
+        port: 14
+        type: "continuous"
+
+    # Entradas y salidas digitales de la VMX.
+    # IMPORTANTE: los canales 12-21 (cabecera High-Current DIO) son TODOS salidas
+    # o TODOS entradas según un jumper (por defecto, salidas), y los servos y los
+    # LEDs las necesitan como salidas. Por eso los botones y finales de carrera
+    # (entradas) van en la cabecera FlexDIO, canales 8-11, que se configuran uno a uno.
+    # Topics que genera el driver a partir del nombre de cada una:
+    #   entradas -> /<nombre>/state   (std_msgs/Bool, nivel del pin: true = HIGH)
+    #   salidas  -> /<nombre>/cmd     (std_msgs/Bool, pone el pin en HIGH/LOW)
+    # Los pines de entrada llevan pull-up interno: el contacto va entre el pin y GND.
+    dio:
+      enabled: true
+      sensors: ["btn_stop", "btn_start", "fc_sup", "fc_inf",
+                "cobra_s0", "cobra_s1", "cobra_s2", "cobra_s3", "led_rojo"]
+
+      # --- Botones (contacto NO: HIGH en reposo, LOW al pulsar) ---
+      btn_stop:
+        pin: 8
+        type: "input"
+        interrupt_edge: "falling"   # publica al instante al pulsar
+        debounce_ms: 20
+
+      # RESET: sin uso de momento. Cuando se use, ponerlo también en un canal
+      # FlexDIO libre (0-7 en los conectores GH) como entrada, igual que los demás.
+
+      btn_start:
+        pin: 9
+        type: "input"
+        interrupt_edge: "falling"
+        debounce_ms: 20
+
+      # --- Finales de carrera (contacto NO: HIGH en reposo, LOW al tocar) ---
+      fc_sup:
+        pin: 10
+        type: "input"
+        interrupt_edge: "falling"
+        debounce_ms: 10
+
+      fc_inf:
+        pin: 11
+        type: "input"
+        interrupt_edge: "falling"
+        debounce_ms: 10
+
+      # --- Sensor de línea Cobra: S0 (el más a la izquierda) ... S3 (el más a la derecha) ---
+      # Entradas digitales en la cabecera FlexDIO (canales 0-7 libres). NO pueden ir en los
+      # canales 18-21: esa cabecera es de salidas (jumper) por los servos y el LED rojo.
+      # Sin interrupción: el driver publica el nivel de cada pin 10 veces por segundo.
+      cobra_s0:
+        pin: 0
+        type: "input"
+
+      cobra_s1:
+        pin: 1
+        type: "input"
+
+      cobra_s2:
+        pin: 2
+        type: "input"
+
+      cobra_s3:
+        pin: 3
+        type: "input"
+
+      # --- LEDs (salida: HIGH = encendido) ---
+      # El LED verde (antes en el pin 21) se ha quitado de momento: sin cablear.
+      led_rojo:
+        pin: 17
+        type: "output"

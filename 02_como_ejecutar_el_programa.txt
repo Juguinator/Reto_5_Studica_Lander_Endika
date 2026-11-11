@@ -1,0 +1,24 @@
+Seguir estos pasos si ya has leido 01_como_preparar_primera_vez.txt
+
+Conectarte a la red Wi-Fi llamada "VMX-1234", con la contraseña "password"
+
+Abrir la consola de comandos --> Win + R --> cmd
+Entrar con --> ssh vmx@10.12.34.2
+Introducir la contraseña --> password
+
+Ejecutar los siguientes comandos para activar los perifericos:
+source /opt/ros/humble/setup.bash
+source ~/studica_ws/install/setup.bash
+ros2 launch studica_control studica_launch.py params_file:=$HOME/studica_ws/src/studica_control/config/params.yaml
+
+Dejamos esta terminal en segundo plano y creamos otra terminal a la que nos conectamos por SSH
+Ejecutamos los siguientes comandos para activar el programa:
+
+source /opt/ros/humble/setup.bash
+source ~/studica_ws/install/setup.bash
+cd /home/vmx/studica_reto_5
+python3 Reto_5_Studica_Lander_Endika.py
+
+y ya estaría ejecutandose el programa, solo sería necesario pulsar el boton de Start del robot para hacerlo funcionar
+
+Recomiendo leer 03_Funciones_del_robot.txt para entender todos los botones.
