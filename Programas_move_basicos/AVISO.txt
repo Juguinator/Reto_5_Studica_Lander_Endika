@@ -1,0 +1,1 @@
+Estos programas empiezan a mover el robot y no se detienen. Tienes que ejecutar move_stop.py para deternerlos
